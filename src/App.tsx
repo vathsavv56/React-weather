@@ -8,7 +8,7 @@ import { CiAt } from "react-icons/ci";
 
 const App = () => {
   return (
-    <div className="flex items-center justify-center flex-col px-4 py-8 min-h-screen w-full font-jetMono relative bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="flex items-center justify-center flex-col px-4 py-8 min-h-screen w-full font-jetMono relative bg-linear-to-br from-blue-50 to-indigo-100">
       {/* App Title */}
       <div className="text-xl sm:text-2xl lg:text-3xl mb-6 sm:mb-8 lg:mb-10 flex items-center gap-2 relative z-10">
         <h1 className="before:content-[''] before:w-0 before:h-1 before:bg-red-500 before:absolute before:bottom-0 before:left-0 before:transition-all before:duration-300 hover:before:w-full before:opacity-0 hover:before:opacity-100 cursor-pointer rounded-3xl px-3 py-2 sm:px-4 sm:py-2 flex items-center gap-2">

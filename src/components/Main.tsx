@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { CiCloudSun } from "react-icons/ci";
+import { IoIosWarning } from "react-icons/io";
 const Main = () => {
   const [city, SetCity] = useState("");
   const [data, SetData] = useState<any>();
@@ -110,7 +111,7 @@ const Main = () => {
           <div className="text-center min-h-[200px] flex items-center justify-center">
             <div>
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-gray-400 text-lg sm:text-2xl">🌤️</span>
+                <span className="text-red-600 text-lg sm:text-2xl"><IoIosWarning/></span>
               </div>
               <p className="text-red-600 font-medium mb-2 text-sm sm:text-base">
                 {error}
