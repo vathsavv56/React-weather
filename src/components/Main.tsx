@@ -59,20 +59,20 @@ const Main = () => {
   };
 
   return (
-    <div className="w-250 h-150 border flex items-center justify-center relative border-pink-500 flex-col gap-10">
+    <div className="w-250 h-150  flex items-center justify-center relative flex-col gap-10">
       <div
         id="main"
-        className="flex items-center justify-between rounded-2xl border border-teal-500 px-4 py-1"
+        className="flex items-center justify-between rounded-2xl shadow px-4 py-1 w-200"
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="w-[99%] ">
           <input
-            type="search"
+            type="text"
             id="city"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               SetCity(e.target.value)
             }
             placeholder="Enter a city name"
-            className="rounded-2xl p-5 h-10 focus:border-none focus:outline-none focus:shadow-none"
+             className="rounded-2xl p-5 h-12 focus:border-none focus:outline-none focus:shadow-none w-full"
             value={city}
           />
         </form>
@@ -82,13 +82,13 @@ const Main = () => {
               fetchData();
             }
           }}
-          className={`cursor-pointer ${loading ? "opacity-50" : "hover:scale-110 transition-transform"}`}
+          className={`cursor-pointer ${loading ? "opacity-50" : "hover:scale-110 transition-transform"} text-4xl rounded-2xl bg-black text-white p-2`}
         />
       </div>
 
       <div
         id="output"
-        className="h-30 w-150 rounded-2xl overflow-auto shadow p-4"
+        className="h-65 w-150 rounded-2xl overflow-auto shadow-lg p-6 bg-white text-black"
       >
         
         {loading && (
