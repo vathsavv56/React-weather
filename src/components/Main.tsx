@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
-// import Loader from "./Loader";
+
 
 const Main = () => {
   const [city, SetCity] = useState("");
@@ -19,35 +19,38 @@ const Main = () => {
   // Fix: Environment variables are now correctly loaded from .env in project root
   const url = import.meta.env.VITE_WEATHER_API_URL;
   const key = import.meta.env.VITE_WEATHER_API_KEY;
-  
+
   const fetchData = async () => {
     // Fix: Prevent multiple simultaneous requests and clear previous errors
     if (loading) return;
-    
+
     setLoading(true);
     setError("");
-    
+
     try {
-      const response = await fetch(`${url}?q=${city}&appid=${key}&units=metric`);
-      
+      const response = await fetch(
+        `${url}?q=${city}&appid=${key}&units=metric`,
+      );
+
       // Fix: Check if the response is successful before parsing JSON
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const result = await response.json();
-      
+
       // Fix: Check if the API returned an error (OpenWeather API returns errors with cod property)
       if (result.cod && result.cod !== 200) {
-        throw new Error(result.message || 'City not found');
+        throw new Error(result.message || "City not found");
       }
-      
-      console.log('Weather data:', result);
+
+      console.log("Weather data:", result);
       SetData(result);
     } catch (err) {
       // Fix: Proper error handling with user-friendly messages
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch weather data';
-      console.error('API Error:', errorMessage);
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch weather data";
+      console.error("API Error:", errorMessage);
       setError(errorMessage);
       SetData(null);
     } finally {
@@ -73,13 +76,13 @@ const Main = () => {
             value={city}
           />
         </form>
-        <CiSearch 
+        <CiSearch
           onClick={() => {
             if (city.trim()) {
               fetchData();
             }
-          }} 
-          className={`cursor-pointer ${loading ? 'opacity-50' : 'hover:scale-110 transition-transform'}`} 
+          }}
+          className={`cursor-pointer ${loading ? "opacity-50" : "hover:scale-110 transition-transform"}`}
         />
       </div>
 
@@ -87,25 +90,29 @@ const Main = () => {
         id="output"
         className="h-30 w-150 rounded-2xl overflow-auto shadow p-4"
       >
-        {/* Fix: Show loading state */}
+        
         {loading && (
           <div className="flex items-center justify-center h-full">
             <p className="text-blue-600">Loading weather data...</p>
           </div>
         )}
+
         
-        {/* Fix: Show error state */}
         {error && (
           <div className="text-red-600 text-center">
             <p>Error: {error}</p>
-            <p className="text-sm mt-2">Please check the city name and try again.</p>
+            <p className="text-sm mt-2">
+              Please check the city name and try again.
+            </p>
           </div>
         )}
-        
-        {/* Fix: Enhanced data display with more weather information */}
+
+       
         {data && !loading && !error && (
           <div className="space-y-2">
-            <h3 className="font-bold text-lg">{data.name}, {data.sys.country}</h3>
+            <h3 className="font-bold text-lg">
+              {data.name}, {data.sys.country}
+            </h3>
             <p className="text-2xl">{Math.round(data.main.temp)}°C</p>
             <p className="capitalize">{data.weather[0].description}</p>
             <p className="text-sm text-gray-600">
@@ -115,7 +122,8 @@ const Main = () => {
               Humidity: {data.main.humidity}%
             </p>
             <p className="text-xs text-gray-500">
-              Coordinates: {data.coord.lat.toFixed(2)}, {data.coord.lon.toFixed(2)}
+              Coordinates: {data.coord.lat.toFixed(2)},{" "}
+              {data.coord.lon.toFixed(2)}
             </p>
           </div>
         )}
